@@ -33,3 +33,26 @@ The main difference between super() and super(props) is the this.props is undefi
 ## Q: (Research) Why can't we have the `callback function` of `useEffect async`?
 
 A: `useEffect` expects it's callback function to return nothing or return a function (cleanup function that is called when the component is unmounted). If we make the callback function as `async`, it will return a `promise` and the promise will affect the clean-up function from being called.
+
+
+# Error Boundry
+
+An Error Boundary in React is a React-specific feature that wraps a component and prevents any errors from spreading to other parts of the application, thus preventing the entire application from crashing. It is designed to catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed. This is similar to a JavaScript `catch {}` block but specifically for components. Error boundaries are crucial for enhancing the dependability and stability of React applications, improving user experience by preventing errors from crashing the entire program [1][3].
+
+Error boundaries are implemented using class components with either or both of the following lifecycle methods:
+- `static getDerivedStateFromError()`: This method is used to render a fallback UI after an error has been thrown.
+- `componentDidCatch()`: This method is used to log error information [1][3].
+
+However, error boundaries have some limitations:
+- They cannot catch all errors, such as those in event handlers, asynchronous programming, or server-side rendering.
+- They can add overhead to your application due to the monitoring of the component tree's condition.
+- They can make debugging errors more difficult as they can hide the initial mistake.
+- They do not replace good coding principles; components should still have strong error handling and validation processes [1].
+
+For functional components, the `useErrorBoundary` hook from third-party libraries can be used to achieve a similar feature. The `react-error-boundary` library provides a more modern approach with React Hooks and functional components, offering a flexible way to handle JavaScript errors in React components. It includes a `useErrorHandler` hook that allows throwing errors from anywhere in function components, which will be caught by the nearest error boundary [3].
+
+React-error-boundary also supports retry mechanisms through the `resetErrorBoundary` function and the `resetKeys` prop, allowing the application to attempt to recover from an error by retrying the failed operation [3].
+
+### in simple terms:-
+
+In simple terms, an Error Boundary in React is like a safety net for your app. It's a special component that catches errors in your app and prevents them from crashing the whole app. Instead, it shows a fallback UI, like an error message, so the user knows something went wrong but the rest of the app can still work. This helps keep your app running smoothly even when there's a problem. Error Boundaries are used by wrapping them around parts of your app that might have errors. They catch those errors and handle them gracefully, without letting the whole app stop working
