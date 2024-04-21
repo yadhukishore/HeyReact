@@ -99,6 +99,15 @@ Because Fiber is asynchronous, React can:
 - Reuse previously completed work and even abort it if not needed
 - Split work into chunks and prioritize tasks based on importance
 
+
+*in simple way:-*
+
+React Fiber is a major update to React that changes how React updates and renders components. It's like a new engine for React that makes it faster and more efficient. Before Fiber, React would update the whole app at once, which could make the app slow or unresponsive. Fiber allows React to work on updates in small chunks, making the app feel smoother and faster. It's like having a more powerful computer that can handle more tasks at the same time without slowing down.
+
+In simple terms, React Fiber is like a new way for React to update and draw the app on the screen. It's designed to make animations and interactions feel smoother and more responsive.
+
+
+
 ## Q: Why do we need `keys` in React?
 
 A: A `key` is a special attribute you need to include when creating lists of elements in React. Keys are used in React to identify which items in the list are changed, updated, or deleted. In other words, we can say that keys are unique Identifier used to give an identity to the elements in the lists.
