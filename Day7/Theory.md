@@ -120,3 +120,22 @@ ReactDOM.render(
 ```
 
 By wrapping your entire application inside the `StrictMode` component, React will perform additional checks and provide warnings for any potential issues it detects within your application. This can help you catch and fix problems early during development. Once your application is ready for production, you can remove `StrictMode` as it's primarily intended for development purposes.
+
+
+# - why spread is used when updating state array rather than .push (reference identity)
+
+Sure, let me explain it in simple terms:
+
+Imagine you have a box filled with toys, and you want to add a new toy to the box. There are two ways you can do this:
+
+1. **Using `.push()` (Incorrect Way)**: You open the box, take out all the toys, add the new toy to the pile, and then put all the toys back into the box. This way, you've modified the original pile of toys, but the box itself remains the same.
+
+2. **Using the spread operator (Correct Way)**: You create a new box and transfer all the toys from the old box to the new box. Then, you add the new toy to the new box. This way, you have a brand new box with all the toys, including the new one.
+
+In React, the state is like the box, and the array (or any other value) inside the state is like the pile of toys.
+
+When you use `.push()` to add a new item to the array, you're modifying the original array, but React doesn't realize that the array has changed because the box (the state) itself hasn't changed. So, React won't re-render the component with the updated array.
+
+On the other hand, when you use the spread operator (`...`) to create a new array with the existing items and the new item, you're creating a new box (a new state) with the updated pile of toys (the updated array). React sees that the box (the state) has changed, so it knows it needs to re-render the component with the updated array.
+
+Using the spread operator to update arrays (or any other value) in the state is the correct way because it creates a new state, which React can detect and re-render the component accordingly. This approach ensures that your component always displays the correct data and avoids potential bugs or performance issues that can arise from directly modifying the state.
