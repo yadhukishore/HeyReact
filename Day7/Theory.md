@@ -139,3 +139,81 @@ When you use `.push()` to add a new item to the array, you're modifying the orig
 On the other hand, when you use the spread operator (`...`) to create a new array with the existing items and the new item, you're creating a new box (a new state) with the updated pile of toys (the updated array). React sees that the box (the state) has changed, so it knows it needs to re-render the component with the updated array.
 
 Using the spread operator to update arrays (or any other value) in the state is the correct way because it creates a new state, which React can detect and re-render the component accordingly. This approach ensures that your component always displays the correct data and avoids potential bugs or performance issues that can arise from directly modifying the state.
+
+
+# Memoization
+
+Sure, let's simplify the concept of memoization with an analogy.
+
+Imagine you have a friend who loves baking cakes, but the process is quite time-consuming. Every time you visit your friend, they bake a new cake from scratch, even if you've requested the same flavor before.
+
+Memoization is like your friend keeping a record of the cakes they've already baked. When you visit and request a cake flavor they've made before, instead of baking it from scratch, they can simply take the pre-made cake from their record and serve it to you. This saves them time and effort, especially if the cake-baking process is complex or resource-intensive.
+
+In programming terms, memoization is a technique where we store the results of expensive function calls and return the cached result when the same inputs are provided again, instead of re-computing the result from scratch.
+
+Here's how it works:
+
+1. When a function is called with certain inputs, memoization checks if the result for those inputs has already been calculated and stored.
+2. If the result is found in the cache (record), it is returned immediately, saving the time and resources needed to recalculate it.
+3. If the result is not found in the cache, the function is executed normally, and the result is stored in the cache for future use with the same inputs.
+
+Memoization can be particularly useful in React when dealing with expensive calculations or rendering expensive components. By memoizing the results, React can avoid unnecessary re-computations or re-renders, improving the overall performance of your application.
+
+It's like your friend optimizing their cake-baking process by keeping a record of the cakes they've already made, so they don't have to start from scratch every time you request the same flavor.
+
+# `useHistory` and `useNavigate`
+
+
+`useHistory` and `useNavigate` are two different hooks used for navigation in React applications, but they serve different purposes and are used in different versions of React Router.
+
+**1. `useHistory`**:
+The `useHistory` hook was introduced in React Router v5 and earlier versions. It provides access to the `history` object, which allows you to programmatically navigate between different routes in your application.
+
+Here's an example of how `useHistory` was used:
+
+```jsx
+import { useHistory } from 'react-router-dom';
+
+function MyComponent() {
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push('/new-route');
+  };
+
+  return <button onClick={handleClick}>Navigate</button>;
+}
+```
+
+In this example, the `useHistory` hook returns the `history` object, which provides methods like `push`, `replace`, and `go` to navigate between routes.
+
+**2. `useNavigate`**:
+The `useNavigate` hook was introduced in React Router v6 as a replacement for `useHistory`. It serves a similar purpose but has a slightly different API and behavior.
+
+Here's an example of how `useNavigate` is used:
+
+```jsx
+import { useNavigate } from 'react-router-dom';
+
+function MyComponent() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/new-route');
+  };
+
+  return <button onClick={handleClick}>Navigate</button>;
+}
+```
+
+In this example, the `useNavigate` hook returns a `navigate` function, which you can call directly with the desired route path to navigate to that route.
+
+The main differences between `useHistory` and `useNavigate` are:
+
+1. **API**: `useHistory` returns the entire `history` object, while `useNavigate` returns a single `navigate` function.
+2. **Navigation behavior**: With `useHistory`, you can use methods like `push`, `replace`, and `go` to navigate, while with `useNavigate`, you simply call the `navigate` function with the desired path.
+3. **Relative paths**: `useNavigate` allows you to use relative paths for navigation, while `useHistory` requires absolute paths.
+
+It's important to note that `useHistory` is deprecated in React Router v6 and will be removed in future versions. If you're starting a new React project or upgrading an existing one to React Router v6, you should use `useNavigate` for navigation purposes.
+
+In summary, `useHistory` was used in older versions of React Router for programmatic navigation, while `useNavigate` is the recommended hook for navigation in React Router v6 and later versions. `useNavigate` provides a simpler and more intuitive API for navigation, with additional features like relative path support.
