@@ -58,3 +58,65 @@ The immutability of state has several benefits:
 4. **Concurrency**: Immutable state makes it easier to implement concurrent rendering and other performance optimizations in React, as there is no risk of race conditions or unintended side effects due to state mutations.
 
 In summary, the immutability of state is a core principle in React that promotes predictable state management, efficient rendering, and better performance. By treating state as immutable and creating new objects or arrays with the desired changes, you ensure that your React components behave consistently and efficiently.
+
+# Strict Mode 
+
+StrictMode is a tool in React that helps identify potential problems in an application by intentionally running certain checks and warnings in development mode. It does not directly render any visible UI, but it can cause some components to re-render multiple times, which can help catch issues related to unexpected side effects, inefficient operations, and other potential problems.
+
+When StrictMode is enabled, it runs the following checks and warnings:
+
+1. **Identifying Unexpected Mutations**: StrictMode checks for any unexpected mutations made to the component state or props. If any mutations are detected, it will trigger a warning to help identify potential sources of bugs.
+
+2. **Identifying Unexpected Side Effects**: StrictMode helps identify unexpected side effects caused by functions that are improperly defined as part of the component's render lifecycle. This includes functions defined in the component body or as property initializers.
+
+3. **Identifying Deprecated Findery Methods**: StrictMode warns about the use of the legacy string ref API and callback refs on components that are unmounted or remounted. This helps identify potential issues related to memory leaks.
+
+4. **Detecting Unexpected Mutations in React.Context**: StrictMode can help identify unexpected mutations in the value passed to the React.Context API by running the context provider's value with the old and new values in a separate renderer.
+
+5. **Detecting Unexpected Mutations in Function Components**: StrictMode invokes function components twice in development mode to help identify any potential side effects or mutations that might occur due to impure function component implementations.
+
+To enable StrictMode, you need to wrap the root component or any nested components with the `React.StrictMode` component:
+
+```jsx
+import React from 'react';
+
+function App() {
+  return (
+    <React.StrictMode>
+      {/* Your application components */}
+    </React.StrictMode>
+  );
+}
+```
+
+It's important to note that StrictMode checks are only run in development mode and do not impact the production build. Additionally, StrictMode is intended to be a helping hand to catch potential issues and is not a substitute for comprehensive testing and code review practices.
+
+While StrictMode can help identify potential issues, it may also cause some intentional and legitimate side effects to be flagged. In such cases, you can create a root-level wrapper component and apply StrictMode only to specific parts of the application that need to be checked.
+
+Overall, StrictMode is a valuable tool for identifying and preventing certain types of bugs and issues in React applications during development, ultimately leading to more robust and reliable code.
+
+### its used catch and fix problems early during development.
+
+Yes, typically the `StrictMode` component in React is placed in the root file of your application, such as `index.js` or `App.js`. 
+
+The purpose of `StrictMode` is to highlight potential problems in your application's codebase, such as deprecated features, unsafe lifecycle methods, and legacy context usage. It does this by running additional checks and warnings during development mode.
+
+Here's an example of how you might use `StrictMode` in your root file:
+
+```jsx
+// index.js or App.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import { StrictMode } from 'react';
+
+ReactDOM.render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+  document.getElementById('root')
+);
+```
+
+By wrapping your entire application inside the `StrictMode` component, React will perform additional checks and provide warnings for any potential issues it detects within your application. This can help you catch and fix problems early during development. Once your application is ready for production, you can remove `StrictMode` as it's primarily intended for development purposes.
